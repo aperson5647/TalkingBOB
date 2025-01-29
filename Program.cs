@@ -1,13 +1,45 @@
 ﻿using NetCord;
 using NetCord.Gateway;
 
-GatewayClient client = new(new BotToken("MTIyNDQzNTM4NjAyNjI5NTMzNw.Gs_g8s.czVnzV8Vkwi-ETO1-Cs0aVlOpX8nyfRdSNz2sk"));
-
-client.Log += message =>
+class Program
 {
-    Console.WriteLine(message);
-    return default;
-};
+    public static string? TokenReal;
+    static async Task Main()
+    {
+        ReadToken();
 
-await client.StartAsync();
-await Task.Delay(-1);
+        if (TokenReal == null)
+        {
+            Console.WriteLine("Token is missing! Exiting...");
+            return; 
+        }
+
+        GatewayClient client = new(new BotToken(TokenReal!));
+
+        client.Log += message =>
+        {
+            Console.WriteLine(message);
+            return default;
+        };
+
+        Yahoo.SpeakNOW();
+
+        await client.StartAsync();
+        await Task.Delay(-1);
+    }
+
+    static void ReadToken()
+    {
+        TokenReal = File.ReadAllText("config.txt");
+        Console.WriteLine("Connected on " + TokenReal);
+    }
+}
+
+class Yahoo
+{
+    public static void SpeakNOW()
+    {
+         Console.WriteLine("Hello!!!!");
+         return;
+    }
+}
