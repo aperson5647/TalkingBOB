@@ -1,5 +1,6 @@
 # This example requires the 'message_content' intent.
 import io
+import math
 
 tokenOp = io.open("config.txt")
 token = tokenOp.read()
@@ -25,17 +26,19 @@ class MyClient(discord.Client):
         if message.channel.id == 1335670414268956672:
             channel1 = self.get_channel(1335670414268956672)
 
-
         if message.author.id != 1330293366960689192:
-            num = random.randint(0,3)
-            if num == 0:
-                await channel1.send('Yes')
-            elif num == 1:
-                await channel1.send('No')
-            elif num == 2:
-                await channel1.send('Kys')
-            elif num == 3:
-                await channel1.send('Shitfart 2.0')
+            num = random.randint(0,17)
+
+            if 0 <= num <= 5:
+                await message.reply('Yes', mention_author=False)
+            elif 6 <= num <= 10:
+                await message.reply('No', mention_author=False)
+            elif 11 <= num <= 13:
+                await message.reply('Kys', mention_author=False)
+            elif 14 <= num <= 16:
+                await message.reply('I have a bomb', mention_author=False)
+            elif num == 17:
+                await channel1.send('Whoever speaks next likes little kids')
 
 intents = discord.Intents.default()
 intents.message_content = True
